@@ -36,3 +36,13 @@ type Experience = {
   tag: string;
   description: string[];
 };
+type Education {
+  degree: string;
+  school: string;
+  location: string;
+  period: string;
+  gpa: string;
+  expectedGraduation: string;
+  major: string;
+  scholarships: string[];
+}

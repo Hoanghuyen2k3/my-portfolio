@@ -87,6 +87,68 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   </motion.div>
 );
 
+// Add education data
+const education: Education = {
+  degree: "Bachelor of Engineering Information Systems",
+  school: "Humber Polytechnic",
+  location: "Toronto, CA",
+  period: "2022 - 2026",
+  gpa: "3.7/4.0",
+  expectedGraduation: "May 2026",
+  major: "Internet of Things",
+  scholarships: [
+    "Renewable degree entrance scholarship",
+    "FAST Bachelor of Engineering diversity leadership scholarship"
+  ]
+};
+
+// Education Section Component
+const EducationSection: React.FC<{ education: Education }> = ({ education }) => (
+  <motion.div 
+    className="bg-white rounded-lg p-6 shadow-lg"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="space-y-4">
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900">{education.degree}</h3>
+          <p className="text-lg text-gray-700">{education.school}</p>
+          <p className="text-md text-gray-600">{education.location}</p>
+        </div>
+        <div className="text-right">
+          {/* <p className="text-pink-500 font-medium">{education.period}</p> */}
+          <p className="text-pink-600 font-medium">Expected: {education.expectedGraduation}</p>
+          <p className="text-gray-600">GPA: {education.gpa}</p>
+        </div>
+      </div>
+      
+      <div>
+        <p className="text-gray-700"><span className="font-medium">Major:</span> {education.major}</p>
+      </div>
+
+      <div>
+        <h4 className="font-medium text-gray-900 mb-2">Scholarships & Awards</h4>
+        <ul className="space-y-2">
+          {education.scholarships.map((scholarship, index) => (
+            <motion.li 
+              key={index}
+              className="flex items-start"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <span className="w-1.5 h-1.5 mt-2 rounded-full bg-pink-400 mr-2" />
+              <span className="text-gray-600">{scholarship}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </motion.div>
+);
 
 const experiences = [
   {
@@ -132,21 +194,36 @@ const Portfolio: React.FC = () => {
   // Refs for each section
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const experienceRef = useRef<HTMLDivElement | null>(null);
+  const educationRef = useRef<HTMLDivElement | null>(null);
+  const skillRef = useRef<HTMLDivElement | null>(null);
   const projectsRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
+  // const handleSectionClick = (section: string) => {
+  //   setActiveSection(section);
+
+  //   // Scroll to the corresponding section
+  //   if (section === 'about' && aboutRef.current) {
+  //     aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   } else if (section === 'experience' && experienceRef.current) {
+  //     experienceRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   } else if (section === 'projects' && projectsRef.current) {
+  //     projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   } else if (section === 'contact' && contactRef.current) {
+  //     contactRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // };
+
   const handleSectionClick = (section: string) => {
     setActiveSection(section);
-
-    // Scroll to the corresponding section
-    if (section === 'about' && aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else if (section === 'experience' && experienceRef.current) {
-      experienceRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else if (section === 'projects' && projectsRef.current) {
-      projectsRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else if (section === 'contact' && contactRef.current) {
-      contactRef.current.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(section);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offset = 100; // Adjust this value to fine-tune the scroll position
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -416,7 +493,7 @@ const Portfolio: React.FC = () => {
               Thi Huyen Hoang 🌷
             </motion.h1>
             <div className="flex space-x-6">
-              {['about', 'experience', 'projects', 'contact'].map((section) => (
+              {['about','education', 'skills', 'experience', 'projects', 'contact'].map((section) => (
                 <motion.button
                   key={section}
                   whileHover={{ scale: 1.1 }}
@@ -503,6 +580,24 @@ const Portfolio: React.FC = () => {
   </div>
 </motion.section>
 
+    {/* Add Education section before Skills section */}
+    <motion.section 
+        className="py-20 px-4"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
+        <div className="max-w-6xl mx-auto" ref={educationRef} id="education"> 
+          <motion.h2 
+            className="text-3xl font-bold mb-12"
+            variants={fadeInUp}
+          >
+            Education
+          </motion.h2>
+          <EducationSection education={education} />
+        </div>
+      </motion.section>
+
         
 
 
@@ -520,7 +615,7 @@ const Portfolio: React.FC = () => {
             >
               Skills & Expertise
             </motion.h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" ref={experienceRef} id="experience">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" ref={skillRef} id="skills">
               {Object.entries(skills).map(([key, data], index) => (
                 <SkillCard key={key} skill={key} data={data} />
               ))}
@@ -543,7 +638,7 @@ const Portfolio: React.FC = () => {
             >
               Experience
             </motion.h2>
-            <div className="relative">
+            <div className="relative" ref={experienceRef} id="experience">
               {experiences.map((exp, index) => (
                 <TimelineItem 
                   key={`${exp.company}-${exp.year}`}
