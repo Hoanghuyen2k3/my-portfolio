@@ -17,7 +17,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import emailjs from '@emailjs/browser';
 import { SendIcon, PhoneIcon } from 'lucide-react';
-
+import FloatingSkills from './skills';
 const TimelineItem: React.FC<TimelineItemProps> = ({ 
   year, 
   title, 
@@ -268,11 +268,10 @@ const Portfolio: React.FC = () => {
         "React.js",
         "Redux",
         "TypeScript",
-        "Next.js",
+        "JavaScript",
         "Tailwind CSS",
-        "HTML5",
-        "CSS3",
-        "SASS"
+        "HTML",
+        "CSS3/SASS"
       ],
       color: "bg-pink-50"
     },
@@ -280,14 +279,13 @@ const Portfolio: React.FC = () => {
       icon: <ServerIcon className="w-8 h-8" />,
       title: "Backend & Mobile App",
       items: [
-        "Node.js",
+        "Node.js / Next.js",
         "ASP.NET",
-        "C#",
         "Python",
         "Java",
-        "C/C++",
-        "Dart",
-        "Flutter"
+        "C/ C# /C++",
+        "Dart / Flutter",
+        "Bash/Shell Scripting"
       ],
       color: "bg-yellow-50"
     },
@@ -299,7 +297,6 @@ const Portfolio: React.FC = () => {
         "Postgres",
         "MongoDB",
         "Redis",
-        "SQL Server",
         "Firebase"
       ],
       color: "bg-orange-50"
@@ -616,6 +613,9 @@ const Portfolio: React.FC = () => {
           <EducationSection education={education} />
         </div>
       </motion.section>
+
+      <FloatingSkills />
+
 
         
 
