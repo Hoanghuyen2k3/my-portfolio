@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { GithubIcon, LinkedinIcon, MailIcon, ExternalLinkIcon, Code2Icon, DatabaseIcon, BrainCircuitIcon, MonitorIcon } from 'lucide-react';
+import {
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  ExternalLinkIcon,
+  Code2Icon,
+  DatabaseIcon,
+  BrainCircuitIcon,
+  MonitorIcon,
+  ServerIcon
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -64,36 +74,36 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
 const experiences = [
   {
-    year: "2022 - Present",
-    title: "Senior Software Engineer",
-    company: "Tech Solutions Inc.",
-    location: "San Francisco, CA",
+    year: "May 2024 - Present",
+    title: "Junior Software Developer",
+    company: "MDMToGO",
+    location: "Mississauga,, CA",
     description: [
-      "Led a team of 5 developers in rebuilding the company's flagship product using React and TypeScript",
-      "Improved application performance by 40% through code optimization and implementing lazy loading",
-      "Established CI/CD pipelines reducing deployment time by 60%"
+      "Developed intuitive Front-end with robust Back-end functionality using C#, ASP.NET, Web API, and Android Management API (AMAPI), delivering scalable EMM web applications capable of handling 1M+ device requests daily",
+      "Optimized SQL Server databases, reducing query latency by 50% through efficient indexing and stored procedures",
+      "Improved page load times by 80% using caching techniques, lazy loading, and database query optimizations",
+      "Designed and implemented end-to-end geofencing features with minimal guidance across Android app, backend APIs, front-end, and database, achieving 95% accuracy in device event detection",
+      "Enabled dynamic creation and enforcement of geofence boundaries for real-time tracking across 5,000+ devices",
+      "Built a high accuracy geofencing system using Java and Ray Casting Algorithm, processing updates under 200ms",
+      "Integrated enforcement controls with AMAPI, including kiosk mode, lockdown, and notifications for policy compliance",
+      "Reduced rule synchronization latency by 25% using Firebase Push Notifications, scaling to support 100+ geofence rules per user",
+      "Reduced Azure Maps costs by 40% by implementing a multi-tier caching strategy using local disk, in-memory, and Redis",
+      "Developed a secure Wi-Fi management system with backend support for client/server certificate handling, enhancing device enrollment security and boosting user autonomy by 30%",
+      "Strengthened device security by allowing users to set password complexity levels and enforce encryption and compliance policies, reducing unauthorized access by 25%",
+      "Automated help page generation from a private Azure repository, reducing manual updates by 80% and improving user query response time by 50% with a real-time, searchable help system",
+      "Architected an event log system to track user interactions, enhancing system auditability and reducing debugging time by 40%",
+      "Collaborated on DevOps workflows using Azure DevOps, implementing CI/CD pipelines and automated testing, reducing deployment times by 70%",
+      "Implemented unit testing with NUnit, achieving 95% test coverage and ensuring application stability and reliability",
+      "Participated in code reviews and followed Agile methodologies, improving code quality and development efficiency"
     ]
   },
   {
-    year: "2020 - 2022",
-    title: "Full Stack Developer",
-    company: "Digital Innovations Ltd",
-    location: "New York, NY",
+    year: "Sep 2022 - Aug 2023",
+    title: "Math Tutor",
+    company: "Humber College",
+    location: "Toronto, CA",
     description: [
-      "Developed and maintained 3 major client-facing applications using Next.js and Node.js",
-      "Implemented automated testing reducing bug reports by 30%",
-      "Mentored 4 junior developers and led technical training sessions"
-    ]
-  },
-  {
-    year: "2018 - 2020",
-    title: "Junior Developer",
-    company: "StartUp Hub",
-    location: "Boston, MA",
-    description: [
-      "Built responsive web applications using React and Redux",
-      "Collaborated with UX team to implement new design system",
-      "Contributed to open-source projects and internal tools"
+      "Tutored complex topics, including Calculus, Linear Algebra, Discrete Mathematics, Probability & Statistics and Data Structures & Algorithms, improving student academic performance with average grades of 15%",
     ]
   }
 ];
@@ -120,28 +130,90 @@ const Portfolio: React.FC = () => {
     frontend: {
       icon: <MonitorIcon className="w-8 h-8" />,
       title: "Frontend",
-      items: ["React", "TypeScript", "Next.js", "Tailwind"],
+      items: [
+        "React.js",
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "HTML5",
+        "CSS3",
+        "SASS"
+      ],
       color: "bg-pink-50"
     },
     backend: {
-      icon: <DatabaseIcon className="w-8 h-8" />,
+      icon: <ServerIcon className="w-8 h-8" />,
       title: "Backend",
-      items: ["Node.js", "Python", "MongoDB", "SQL"],
+      items: [
+        "Node.js",
+        "ASP.NET",
+        "C#",
+        "Python",
+        "Java",
+        "C/C++",
+      ],
       color: "bg-yellow-50"
+    },
+    databases: {
+      icon: <DatabaseIcon className="w-8 h-8" />,
+      title: "Databases",
+      items: [
+        "SQL",
+        "Postgres",
+        "MongoDB",
+        "Redis",
+        "SQL Server",
+        "Firebase"
+      ],
+      color: "bg-orange-50"
     },
     tools: {
       icon: <Code2Icon className="w-8 h-8" />,
       title: "Tools",
-      items: ["Git", "Docker", "AWS", "Jest"],
+      items: [
+        "Git",
+        "Docker",
+        "AWS",
+        "Azure DevOps",
+        "Kubernetes",
+        "Jenkins",
+        "Postman",
+        "Linux",
+        "Jira"
+      ],
       color: "bg-green-50"
+    },
+    dataScience: {
+      icon: <Code2Icon className="w-8 h-8" />,
+      title: "Data Science & ML",
+      items: [
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Scikit-Learn",
+        "Keras",
+        "Seaborn",
+        "TensorFlow",
+        "Plotly"
+      ],
+      color: "bg-purple-50"
     },
     other: {
       icon: <BrainCircuitIcon className="w-8 h-8" />,
       title: "Other",
-      items: ["Agile", "CI/CD", "Problem Solving", "Team Work"],
+      items: [
+        "Agile",
+        "CI/CD",
+        "REST API",
+        "JUnit",
+        "NUnit",
+        "Problem Solving",
+        "Team Work",
+      ],
       color: "bg-blue-50"
     }
   };
+  
 
   const projects: Project[] = [
     {
@@ -300,7 +372,7 @@ const Portfolio: React.FC = () => {
               className="text-2xl font-bold text-gray-800"
               whileHover={{ scale: 1.05 }}
             >
-              Jane Doe
+              Thi Huyen Hoang 🌷
             </motion.h1>
             <div className="flex space-x-6">
               {['about', 'experience', 'projects', 'contact'].map((section) => (
@@ -336,7 +408,7 @@ const Portfolio: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Hello, I'm Jane! 👋
+              Hello, I'm Thi Huyen! 👋
             </motion.h1>
             <motion.p 
               className="text-xl text-gray-700 max-w-2xl"
@@ -344,10 +416,20 @@ const Portfolio: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              A passionate software engineer in my 20s, turning creative ideas into elegant solutions.
+              A girl with a big dream, doing my 20s with a smile 😊 and navigating through tech world🍀.
+            </motion.p>
+            
+            <motion.p 
+              className="text-xl text-gray-700 max-w-2xl"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              A passionate and innovative Software Engineer with a passion for developing scalable, secure, and efficient applications.
               Currently seeking new opportunities to make an impact in tech.
             </motion.p>
           </div>
+          <div>hi</div>
         </motion.section>
 
         {/* Skills Section */}
@@ -364,7 +446,7 @@ const Portfolio: React.FC = () => {
             >
               Skills & Expertise
             </motion.h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {Object.entries(skills).map(([key, data], index) => (
                 <SkillCard key={key} skill={key} data={data} />
               ))}
