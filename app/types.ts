@@ -36,7 +36,8 @@ type Experience = {
   tag: string;
   description: string[];
 };
-type Education {
+
+type Education = {
   degree: string;
   school: string;
   location: string;

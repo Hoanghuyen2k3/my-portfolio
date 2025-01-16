@@ -104,7 +104,6 @@ const education: Education = {
   ]
 };
 
-// Education Section Component
 const EducationSection: React.FC<{ education: Education }> = ({ education }) => (
   <motion.div 
     className="bg-white rounded-lg p-6 shadow-lg"
@@ -121,7 +120,6 @@ const EducationSection: React.FC<{ education: Education }> = ({ education }) => 
           <p className="text-md text-gray-600">{education.location}</p>
         </div>
         <div className="text-right">
-          {/* <p className="text-pink-500 font-medium">{education.period}</p> */}
           <p className="text-pink-600 font-medium">Expected: {education.expectedGraduation}</p>
           <p className="text-gray-600">GPA: {education.gpa}</p>
         </div>
@@ -193,7 +191,7 @@ const experiences = [
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-  // Refs for each section
+
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const experienceRef = useRef<HTMLDivElement | null>(null);
   const educationRef = useRef<HTMLDivElement | null>(null);
@@ -201,27 +199,12 @@ const Portfolio: React.FC = () => {
   const projectsRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
-  // const handleSectionClick = (section: string) => {
-  //   setActiveSection(section);
-
-  //   // Scroll to the corresponding section
-  //   if (section === 'about' && aboutRef.current) {
-  //     aboutRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   } else if (section === 'experience' && experienceRef.current) {
-  //     experienceRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   } else if (section === 'projects' && projectsRef.current) {
-  //     projectsRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   } else if (section === 'contact' && contactRef.current) {
-  //     contactRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // };
-
   const handleSectionClick = (section: string) => {
     setActiveSection(section);
     const element = document.getElementById(section);
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offset = 100; // Adjust this value to fine-tune the scroll position
+      const offset = 100; 
       window.scrollTo({
         top: elementPosition - offset,
         behavior: 'smooth'
@@ -241,10 +224,10 @@ const Portfolio: React.FC = () => {
     console.log(form.current)
     try {
       const result = await emailjs.sendForm(
-        'service_t584l8k', // Replace with your EmailJS service ID
-        'template_ueylhdg', // Replace with your EmailJS template ID
+        'service_t584l8k', 
+        'template_ueylhdg', 
         form.current,
-        'PnQiijukQSRGezFS0' // Replace with your EmailJS public key
+        'PnQiijukQSRGezFS0' 
       );
 
       if (result.text === 'OK') {
@@ -605,7 +588,7 @@ const Portfolio: React.FC = () => {
     {/* Image section */}
     <div className="w-full md:w-1/3 mt-6 md:mt-0 text-center md:text-left">
       <motion.img
-        src="/gif/thi.jpg" // Adjust the path as necessary
+        src="/gif/thi.jpg" 
         alt="Thi Huyen"
         className="rounded-full w-full h-auto object-cover max-w-[300px]  mx-auto"
         initial={{ opacity: 0, x: 20 }}
