@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   GithubIcon,
   LinkedinIcon,
@@ -21,6 +21,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   title, 
   company,
   location,
+  tag,
   description, 
   isLast = false 
 }) => (
@@ -55,6 +56,21 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
             <p className="text-sm text-gray-500">{location}</p>
           </div>
         </div>
+        {/* Tag Section */}
+        <motion.div className="flex flex-wrap gap-2 mb-4">
+          {tag && tag.split(",").map((tech, i) => (  // Assuming `tag` is a comma-separated string
+            <motion.span 
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-600"
+            >
+              {tech.trim()}  {/* Trim to remove any extra spaces */}
+            </motion.span>
+          ))}
+        </motion.div>
+
         <ul className="mt-4 space-y-2">
           {description.map((item, index) => (
             <li 
@@ -77,7 +93,8 @@ const experiences = [
     year: "May 2024 - Present",
     title: "Junior Software Developer",
     company: "MDMToGO",
-    location: "Mississauga,, CA",
+    location: "Mississauga, CA",
+    tag: "ASP.NET, C#, Java, AMAPI, Full-stack Developement, Android Development, Enterprise Mobility Management (EMM) application, Firebase, Redis, Azure",
     description: [
       "Developed intuitive Front-end with robust Back-end functionality using C#, ASP.NET, Web API, and Android Management API (AMAPI), delivering scalable EMM web applications capable of handling 1M+ device requests daily",
       "Optimized SQL Server databases, reducing query latency by 50% through efficient indexing and stored procedures",
@@ -102,6 +119,7 @@ const experiences = [
     title: "Math Tutor",
     company: "Humber College",
     location: "Toronto, CA",
+    tag: "Teaching",
     description: [
       "Tutored complex topics, including Calculus, Linear Algebra, Discrete Mathematics, Probability & Statistics and Data Structures & Algorithms, improving student academic performance with average grades of 15%",
     ]
@@ -111,6 +129,26 @@ const experiences = [
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  // Refs for each section
+  const aboutRef = useRef<HTMLDivElement | null>(null);
+  const experienceRef = useRef<HTMLDivElement | null>(null);
+  const projectsRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSectionClick = (section: string) => {
+    setActiveSection(section);
+
+    // Scroll to the corresponding section
+    if (section === 'about' && aboutRef.current) {
+      aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (section === 'experience' && experienceRef.current) {
+      experienceRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (section === 'projects' && projectsRef.current) {
+      projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (section === 'contact' && contactRef.current) {
+      contactRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -132,6 +170,7 @@ const Portfolio: React.FC = () => {
       title: "Frontend",
       items: [
         "React.js",
+        "Redux",
         "TypeScript",
         "Next.js",
         "Tailwind CSS",
@@ -143,7 +182,7 @@ const Portfolio: React.FC = () => {
     },
     backend: {
       icon: <ServerIcon className="w-8 h-8" />,
-      title: "Backend",
+      title: "Backend & Mobile App",
       items: [
         "Node.js",
         "ASP.NET",
@@ -151,6 +190,8 @@ const Portfolio: React.FC = () => {
         "Python",
         "Java",
         "C/C++",
+        "Dart",
+        "Flutter"
       ],
       color: "bg-yellow-50"
     },
@@ -380,7 +421,7 @@ const Portfolio: React.FC = () => {
                   key={section}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveSection(section)}
+                  onClick={() => handleSectionClick(section)}
                   className={`capitalize hover:text-pink-500 transition-colors ${
                     activeSection === section ? 'text-pink-500' : 'text-gray-600'
                   }`}
@@ -394,15 +435,18 @@ const Portfolio: React.FC = () => {
       </motion.nav>
 
       <AnimatePresence>
-        <motion.section 
-          className="pt-32 pb-20 px-4 bg-gradient-to-br from-pink-50 to-yellow-50"
-          variants={fadeInUp}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          <div className="max-w-6xl mx-auto">
-            <motion.h1 
+
+        <motion.section
+        className="pt-32 pb-20 px-4 bg-gradient-to-br from-pink-50 to-yellow-50"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
+          {/* Text section */}
+          <div className="flex-1" ref={aboutRef} id="about">
+            <motion.h1
               className="text-5xl font-bold mb-6"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -410,27 +454,57 @@ const Portfolio: React.FC = () => {
             >
               Hello, I'm Thi Huyen! 👋
             </motion.h1>
-            <motion.p 
+            <motion.p
               className="text-xl text-gray-700 max-w-2xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              A girl with a big dream, doing my 20s with a smile 😊 and navigating through tech world🍀.
+              A girl with a big dream, doing my 20s with a smile 😊 and navigating through the tech world 🍀.
             </motion.p>
-            
-            <motion.p 
+
+            <motion.p
               className="text-xl text-gray-700 max-w-2xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              A passionate and innovative Software Engineer with a passion for developing scalable, secure, and efficient applications.
-              Currently seeking new opportunities to make an impact in tech.
+              I am an innovative and detail-oriented <b>Software Engineer</b> with a strong passion for developing scalable, secure, and efficient applications. With expertise in both <b>Web and Mobile App Development</b>, I am constantly exploring new technologies to build impactful solutions.
+            </motion.p>
+            <motion.p
+              className="text-xl text-gray-700 max-w-2xl"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+            My interests also extend to <b>AI/ML</b> and large language models (LLM), where I aim to leverage cutting-edge advancements to drive innovation.
+            </motion.p>
+            <motion.p
+              className="text-xl text-gray-700 max-w-2xl"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+            Currently, I am seeking new opportunities where I can contribute my skills and make a meaningful impact in the tech industry.
             </motion.p>
           </div>
-          <div>hi</div>
-        </motion.section>
+
+    {/* Image section */}
+    <div className="w-full md:w-1/3 mt-6 md:mt-0 text-center md:text-left">
+      <motion.img
+        src="/gif/thi.jpg" // Adjust the path as necessary
+        alt="Thi Huyen"
+        className="rounded-full w-full h-auto object-cover max-w-[300px]  mx-auto"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.4 }}
+      />
+    </div>
+  </div>
+</motion.section>
+
+        
+
 
         {/* Skills Section */}
         <motion.section 
@@ -446,7 +520,7 @@ const Portfolio: React.FC = () => {
             >
               Skills & Expertise
             </motion.h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" ref={experienceRef} id="experience">
               {Object.entries(skills).map(([key, data], index) => (
                 <SkillCard key={key} skill={key} data={data} />
               ))}
@@ -456,7 +530,6 @@ const Portfolio: React.FC = () => {
 
         {/* Rest of the sections with similar motion components */}
         
-        // Add this section in the return statement after the Skills section
         <motion.section 
           className="py-20 px-4"
           variants={staggerContainer}
@@ -478,6 +551,7 @@ const Portfolio: React.FC = () => {
                   title={exp.title}
                   company={exp.company}
                   location={exp.location}
+                  tag={exp.tag}
                   description={exp.description}
                   isLast={index === experiences.length - 1}
                 />
@@ -500,7 +574,7 @@ const Portfolio: React.FC = () => {
             >
               Projects
             </motion.h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8" ref={projectsRef} id="projects">
               {projects.map((project, index) => (
                 <ProjectCard 
                   key={`project-${project.title}-${index}`}
@@ -520,7 +594,7 @@ const Portfolio: React.FC = () => {
         >
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Let's Connect!</h2>
-            <div className="flex justify-center space-x-8">
+            <div className="flex justify-center space-x-8" ref={contactRef} id="contact">
               {['linkedin', 'github', 'email'].map((platform, index) => (
                 <motion.div
                   key={`${platform}-${index}`}  
@@ -528,7 +602,11 @@ const Portfolio: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link 
-                    href={`https://${platform}.com/username`}
+                    href={
+                      platform === 'linkedin' ? 'https://www.linkedin.com/in/thihuyen-ho30/' : 
+                      platform === 'github' ? 'https://github.com/Hoanghuyen2k3' : 
+                      'mailto:khanhhuyenx20@gmail.com'
+                    }
                     className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -543,6 +621,7 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
         </motion.section>
+
       </AnimatePresence>
     </div>
   );

@@ -23,6 +23,7 @@ type TimelineItemProps = {
   title: string;
   company: string;
   location: string;
+  tag: string;
   description: string[];
   isLast?: boolean;
 };
@@ -32,5 +33,6 @@ type Experience = {
   company: string;
   location: string;
   role: string;
+  tag: string;
   description: string[];
 };
