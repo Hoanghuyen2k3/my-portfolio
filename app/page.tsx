@@ -145,12 +145,12 @@ const Portfolio: React.FC = () => {
 
   const projects: Project[] = [
     {
-      title: "Project 1",
-      description: "Full-stack web application for task management",
-      technologies: ["React", "Node.js", "MongoDB"],
-      github: "https://github.com/username/project1",
-      demo: "https://project1-demo.com",
-      image: "/api/placeholder/600/400"
+      title: "Cloud based smart mornitoring system",
+      description: "The smart room system focuses on monitoring temperature, humidity, light, and occupancy, providing better room environment management. The project involves the integration of hardware, software, and cloud-based solutions to achieve a comprehensive smart room system.",
+      technologies: ["C", "C++", "Python", "Flutter", "Deep Neural Networks (DNN)", "Arduino IDE", "Networking", "Machine Learning"],
+      github: "https://github.com/Hoanghuyen2k3/Cloud-based-smart-monitoring-system",
+      demo: "https://youtu.be/PrwEOURVKtA?autoplay=1&mute=1",
+      image: "/gif/cloud1.png/600/400"
     },
     {
       title: "Project 2",
@@ -158,7 +158,7 @@ const Portfolio: React.FC = () => {
       technologies: ["Python", "TensorFlow", "OpenCV"],
       github: "https://github.com/username/project2",
       demo: "https://project2-demo.com",
-      image: "/api/placeholder/600/400"
+      image: "/gif/cloud1.png/600/400"
     }
   ];
 
