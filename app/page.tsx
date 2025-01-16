@@ -62,7 +62,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 );
 
 
-// Update the experiences data
 const experiences = [
   {
     year: "2022 - Present",
@@ -195,28 +194,6 @@ const Portfolio: React.FC = () => {
     );
   };
 
-  // const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, isLast }) => (
-  //   <motion.div 
-  //     className="relative flex items-start"
-  //     initial={{ opacity: 0, x: -20 }}
-  //     whileInView={{ opacity: 1, x: 0 }}
-  //     viewport={{ once: true }}
-  //     transition={{ duration: 0.5 }}
-  //   >
-  //     <div className="flex flex-col items-center mr-4">
-  //       <motion.div 
-  //         className="w-3 h-3 bg-pink-500 rounded-full"
-  //         whileHover={{ scale: 1.5 }}
-  //       ></motion.div>
-  //       {!isLast && <div className="w-0.5 h-full bg-pink-200"></div>}
-  //     </div>
-  //     <div className="pb-8">
-  //       <p className="text-sm text-gray-500">{year}</p>
-  //       <h3 className="text-lg font-semibold">{title}</h3>
-  //       <p className="text-gray-700">{description}</p>
-  //     </div>
-  //   </motion.div>
-  // );
 
   const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     return (
@@ -432,7 +409,7 @@ const Portfolio: React.FC = () => {
             <div className="flex justify-center space-x-8">
               {['linkedin', 'github', 'email'].map((platform, index) => (
                 <motion.div
-                  key={`${platform}-${index}`}  // Add unique key
+                  key={`${platform}-${index}`}  
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
