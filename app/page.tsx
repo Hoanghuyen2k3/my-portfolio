@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { GithubIcon, LinkedinIcon, MailIcon, ExternalLinkIcon, Code2Icon, DatabaseIcon, BrainCircuitIcon, MonitorIcon } from 'lucide-react';
-import { Skill, SkillCategory, Project, TimelineItemProps, Experience } from './types';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -62,57 +61,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   </motion.div>
 );
 
-
-// const TimelineItem: React.FC<TimelineItemProps> = ({ 
-//   year, 
-//   title, 
-//   company,
-//   location,
-//   description, 
-//   isLast = false 
-// }) => (
-//   <motion.div 
-//     className="relative flex min-h-[200px] items-start"
-//     initial={{ opacity: 0, y: 20 }}
-//     whileInView={{ opacity: 1, y: 0 }}
-//     viewport={{ once: true }}
-//     transition={{ duration: 0.5 }}
-//   >
-//     {/* Timeline line and dot */}
-//     <div className="flex flex-col items-center mr-8">
-//       <motion.div 
-//         className="w-4 h-4 bg-pink-500 rounded-full border-4 border-white shadow-sm"
-//         whileHover={{ scale: 1.2 }}
-//       />
-//       {!isLast && <div className="w-0.5 h-full bg-gray-200 -mt-2" />}
-//     </div>
-
-//     {/* Content */}
-//     <div className="flex-1 pb-12">
-//       <div className="bg-white rounded-lg p-0 pb-6 shadow-sm">
-//         <div className="flex justify-between items-start mb-4">
-//           <div className="space-y-1">
-//             <p className="text-sm font-medium text-pink-500">{year}</p>
-//             <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-//             <p className="text-md text-gray-600">{company}</p>
-//             <p className="text-sm text-gray-500">{location}</p>
-//           </div>
-//         </div>
-//         <ul className="mt-4 space-y-2">
-//           {description.map((item, index) => (
-//             <li 
-//               key={`${company}-${index}`}
-//               className="flex items-start"
-//             >
-//               <span className="w-1.5 h-1.5 mt-2 rounded-full bg-gray-400 mr-2" />
-//               <span className="text-gray-600">{item}</span>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   </motion.div>
-// );
 
 // Update the experiences data
 const experiences = [
