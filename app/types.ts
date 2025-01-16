@@ -21,6 +21,16 @@ type Skill = {
   type TimelineItemProps = {
     year: string;
     title: string;
-    description: string;
+    company: string;
+    location: string;
+    description: string[];
     isLast?: boolean;
+  };
+
+  type Experience = {
+    year: string;
+    company: string;
+    location: string;
+    role: string;
+    description: string[];
   };

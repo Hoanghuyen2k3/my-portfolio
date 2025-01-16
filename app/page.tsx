@@ -2,9 +2,154 @@
 
 import React, { useState } from 'react';
 import { GithubIcon, LinkedinIcon, MailIcon, ExternalLinkIcon, Code2Icon, DatabaseIcon, BrainCircuitIcon, MonitorIcon } from 'lucide-react';
+import { Skill, SkillCategory, Project, TimelineItemProps, Experience } from './types';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+
+const TimelineItem: React.FC<TimelineItemProps> = ({ 
+  year, 
+  title, 
+  company,
+  location,
+  description, 
+  isLast = false 
+}) => (
+  <motion.div 
+    className="relative flex min-h-[200px] items-start"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    {/* Timeline line and dot */}
+    <div className="flex flex-col items-center mr-8">
+      {/* Line */}
+      <div className="absolute left-[11px] top-0 h-full">
+        <div className="w-0.5 h-full bg-pink-500" />
+      </div>
+      {/* Dot */}
+      <motion.div 
+        className="relative z-10 w-6 h-6 bg-pink-500 rounded-full border-4 border-white shadow-sm"
+        whileHover={{ scale: 1.2 }}
+      />
+    </div>
+
+    {/* Content */}
+    <div className="flex-1 pb-12">
+      <div className="bg-white rounded-lg p-0 pb-6 shadow-sm">
+        <div className="flex justify-between items-start mb-4">
+          <div className="space-y-1">
+            <p className="text-sm font-medium text-pink-500">{year}</p>
+            <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+            <p className="text-md text-gray-600">{company}</p>
+            <p className="text-sm text-gray-500">{location}</p>
+          </div>
+        </div>
+        <ul className="mt-4 space-y-2">
+          {description.map((item, index) => (
+            <li 
+              key={`${company}-${index}`}
+              className="flex items-start"
+            >
+              <span className="w-1.5 h-1.5 mt-2 rounded-full bg-gray-400 mr-2" />
+              <span className="text-gray-600">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </motion.div>
+);
+
+
+// const TimelineItem: React.FC<TimelineItemProps> = ({ 
+//   year, 
+//   title, 
+//   company,
+//   location,
+//   description, 
+//   isLast = false 
+// }) => (
+//   <motion.div 
+//     className="relative flex min-h-[200px] items-start"
+//     initial={{ opacity: 0, y: 20 }}
+//     whileInView={{ opacity: 1, y: 0 }}
+//     viewport={{ once: true }}
+//     transition={{ duration: 0.5 }}
+//   >
+//     {/* Timeline line and dot */}
+//     <div className="flex flex-col items-center mr-8">
+//       <motion.div 
+//         className="w-4 h-4 bg-pink-500 rounded-full border-4 border-white shadow-sm"
+//         whileHover={{ scale: 1.2 }}
+//       />
+//       {!isLast && <div className="w-0.5 h-full bg-gray-200 -mt-2" />}
+//     </div>
+
+//     {/* Content */}
+//     <div className="flex-1 pb-12">
+//       <div className="bg-white rounded-lg p-0 pb-6 shadow-sm">
+//         <div className="flex justify-between items-start mb-4">
+//           <div className="space-y-1">
+//             <p className="text-sm font-medium text-pink-500">{year}</p>
+//             <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+//             <p className="text-md text-gray-600">{company}</p>
+//             <p className="text-sm text-gray-500">{location}</p>
+//           </div>
+//         </div>
+//         <ul className="mt-4 space-y-2">
+//           {description.map((item, index) => (
+//             <li 
+//               key={`${company}-${index}`}
+//               className="flex items-start"
+//             >
+//               <span className="w-1.5 h-1.5 mt-2 rounded-full bg-gray-400 mr-2" />
+//               <span className="text-gray-600">{item}</span>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </div>
+//   </motion.div>
+// );
+
+// Update the experiences data
+const experiences = [
+  {
+    year: "2022 - Present",
+    title: "Senior Software Engineer",
+    company: "Tech Solutions Inc.",
+    location: "San Francisco, CA",
+    description: [
+      "Led a team of 5 developers in rebuilding the company's flagship product using React and TypeScript",
+      "Improved application performance by 40% through code optimization and implementing lazy loading",
+      "Established CI/CD pipelines reducing deployment time by 60%"
+    ]
+  },
+  {
+    year: "2020 - 2022",
+    title: "Full Stack Developer",
+    company: "Digital Innovations Ltd",
+    location: "New York, NY",
+    description: [
+      "Developed and maintained 3 major client-facing applications using Next.js and Node.js",
+      "Implemented automated testing reducing bug reports by 30%",
+      "Mentored 4 junior developers and led technical training sessions"
+    ]
+  },
+  {
+    year: "2018 - 2020",
+    title: "Junior Developer",
+    company: "StartUp Hub",
+    location: "Boston, MA",
+    description: [
+      "Built responsive web applications using React and Redux",
+      "Collaborated with UX team to implement new design system",
+      "Contributed to open-source projects and internal tools"
+    ]
+  }
+];
 
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about');
@@ -102,28 +247,28 @@ const Portfolio: React.FC = () => {
     );
   };
 
-  const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, isLast }) => (
-    <motion.div 
-      className="relative flex items-start"
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="flex flex-col items-center mr-4">
-        <motion.div 
-          className="w-3 h-3 bg-pink-500 rounded-full"
-          whileHover={{ scale: 1.5 }}
-        ></motion.div>
-        {!isLast && <div className="w-0.5 h-full bg-pink-200"></div>}
-      </div>
-      <div className="pb-8">
-        <p className="text-sm text-gray-500">{year}</p>
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-gray-700">{description}</p>
-      </div>
-    </motion.div>
-  );
+  // const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, isLast }) => (
+  //   <motion.div 
+  //     className="relative flex items-start"
+  //     initial={{ opacity: 0, x: -20 }}
+  //     whileInView={{ opacity: 1, x: 0 }}
+  //     viewport={{ once: true }}
+  //     transition={{ duration: 0.5 }}
+  //   >
+  //     <div className="flex flex-col items-center mr-4">
+  //       <motion.div 
+  //         className="w-3 h-3 bg-pink-500 rounded-full"
+  //         whileHover={{ scale: 1.5 }}
+  //       ></motion.div>
+  //       {!isLast && <div className="w-0.5 h-full bg-pink-200"></div>}
+  //     </div>
+  //     <div className="pb-8">
+  //       <p className="text-sm text-gray-500">{year}</p>
+  //       <h3 className="text-lg font-semibold">{title}</h3>
+  //       <p className="text-gray-700">{description}</p>
+  //     </div>
+  //   </motion.div>
+  // );
 
   const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     return (
@@ -272,6 +417,61 @@ const Portfolio: React.FC = () => {
 
         {/* Rest of the sections with similar motion components */}
         
+        // Add this section in the return statement after the Skills section
+        <motion.section 
+          className="py-20 px-4"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold mb-12"
+              variants={fadeInUp}
+            >
+              Experience
+            </motion.h2>
+            <div className="relative">
+              {experiences.map((exp, index) => (
+                <TimelineItem 
+                  key={`${exp.company}-${exp.year}`}
+                  year={exp.year}
+                  title={exp.title}
+                  company={exp.company}
+                  location={exp.location}
+                  description={exp.description}
+                  isLast={index === experiences.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Projects Section */}
+        <motion.section 
+          className="py-20 px-4"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold mb-12"
+              variants={fadeInUp}
+            >
+              Projects
+            </motion.h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <ProjectCard 
+                  key={`project-${project.title}-${index}`}
+                  project={project}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
         {/* Contact Section */}
         <motion.section 
           className="py-20 px-4 bg-gradient-to-br from-pink-50 to-yellow-50"
@@ -282,9 +482,9 @@ const Portfolio: React.FC = () => {
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Let's Connect!</h2>
             <div className="flex justify-center space-x-8">
-              {['linkedin', 'github', 'email'].map((platform) => (
+              {['linkedin', 'github', 'email'].map((platform, index) => (
                 <motion.div
-                  key={platform}
+                  key={`${platform}-${index}`}  // Add unique key
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
