@@ -15,6 +15,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import emailjs from '@emailjs/browser';
+import { SendIcon, PhoneIcon } from 'lucide-react';
 
 const TimelineItem: React.FC<TimelineItemProps> = ({ 
   year, 
@@ -226,6 +228,40 @@ const Portfolio: React.FC = () => {
       });
     }
   };
+
+  const form = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.current) return;
+
+    setIsSubmitting(true);
+    console.log(form.current)
+    try {
+      const result = await emailjs.sendForm(
+        'service_t584l8k', // Replace with your EmailJS service ID
+        'template_ueylhdg', // Replace with your EmailJS template ID
+        form.current,
+        'PnQiijukQSRGezFS0' // Replace with your EmailJS public key
+      );
+
+      if (result.text === 'OK') {
+        setSubmitStatus('Message sent successfully!');
+        form.current.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('Failed to send message. Please try again.');
+      console.error('Email send error:', error);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
+
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -681,6 +717,8 @@ const Portfolio: React.FC = () => {
         </motion.section>
 
         {/* Contact Section */}
+
+        
         <motion.section 
           className="py-20 px-4 bg-gradient-to-br from-pink-50 to-yellow-50"
           variants={fadeInUp}
@@ -688,8 +726,93 @@ const Portfolio: React.FC = () => {
           animate="animate"
         >
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-8">Let's Connect!</h2>
-            <div className="flex justify-center space-x-8" ref={contactRef} id="contact">
+            <h2 className="text-3xl font-bold mb-8" ref={contactRef} id="contact">Let's Connect!</h2>
+
+            <motion.div 
+              className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="bg-white rounded-lg p-6 shadow-md">
+                <div className="flex items-center justify-center mb-4">
+                  <MailIcon className="w-6 h-6 text-pink-500 mr-2" />
+                  <h3 className="text-xl font-semibold">Email</h3>
+                </div>
+                <p className="text-gray-600">khanhhuyenx20@gmail.com</p>
+              </div>
+              
+              <div className="bg-white rounded-lg p-6 shadow-md">
+                <div className="flex items-center justify-center mb-4">
+                  <PhoneIcon className="w-6 h-6 text-pink-500 mr-2" />
+                  <h3 className="text-xl font-semibold">Phone</h3>
+                </div>
+                <p className="text-gray-600">+1 (647) 451-9838</p>
+              </div>
+            </motion.div>
+
+            <motion.form
+      ref={form}
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto mt-8 mb-12 bg-white rounded-lg shadow-md p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="mb-4">
+        <input
+          type="text"
+          name="from_name"
+          placeholder="Your Name"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="email"
+          name="reply_to"
+          placeholder="Your Email"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 h-32 resize-none"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-600 transition-colors duration-300 flex items-center justify-center disabled:bg-pink-300"
+      >
+        {isSubmitting ? (
+          'Sending...'
+        ) : (
+          <>
+            <SendIcon className="w-5 h-5 mr-2" />
+            Send Message
+          </>
+        )}
+      </button>
+      {submitStatus && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={`mt-4 text-center ${
+            submitStatus.includes('success') ? 'text-green-600' : 'text-red-600'
+          }`}
+        >
+          {submitStatus}
+        </motion.p>
+      )}
+    </motion.form>
+
+            <div className="flex justify-center space-x-8" >
               {['linkedin', 'github', 'email'].map((platform, index) => (
                 <motion.div
                   key={`${platform}-${index}`}  
