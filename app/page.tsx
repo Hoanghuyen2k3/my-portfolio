@@ -146,20 +146,52 @@ const Portfolio: React.FC = () => {
   const projects: Project[] = [
     {
       title: "Cloud based smart mornitoring system",
-      description: "The smart room system focuses on monitoring temperature, humidity, light, and occupancy, providing better room environment management. The project involves the integration of hardware, software, and cloud-based solutions to achieve a comprehensive smart room system.",
-      technologies: ["C", "C++", "Python", "Flutter", "Deep Neural Networks (DNN)", "Arduino IDE", "Networking", "Machine Learning"],
+      description: "The smart room system enhances environmental control by monitoring temperature, humidity, light, oxygen, and occupancy. With integrated hardware, software, and cloud solutions, it features secure DNN-based facial recognition for authentication and a user-friendly website and mobile app for controlling room settings.",
+      technologies: ["C", "C++", "Python", "Flutter", "Firebase", "Deep Neural Networks (DNN)", "Arduino IDE", "Networking", "Machine Learning", "Internet of Things"],
       github: "https://github.com/Hoanghuyen2k3/Cloud-based-smart-monitoring-system",
       demo: "https://youtu.be/PrwEOURVKtA?autoplay=1&mute=1",
-      image: "/gif/cloud1.png/600/400"
+      image: "/gif/cloud1.png"
     },
     {
-      title: "Project 2",
-      description: "Machine learning model for image classification",
-      technologies: ["Python", "TensorFlow", "OpenCV"],
-      github: "https://github.com/username/project2",
-      demo: "https://project2-demo.com",
-      image: "/gif/cloud1.png/600/400"
-    }
+      title: "So you want to be an auditor",
+      description: "The app provides an engaging, gamified approach to understanding the Canadian tax system, helping immigrants, young adults, and teenagers navigate tax education through interactive levels, challenges, and an AI chatbot for support.",
+      technologies: ["ReactJS", "Python", "Redis", "Cloudflare", "Docker", "FastAPI", "Artificial Intelligence", "Natural Language Processing", "Hackathon SheHacks+8"],
+      github: "https://github.com/So-you-want-to-be-an-auditor/So-you-want-to-be-an-auditor",
+      demo: "https://42e23502.so-you-want-to-be-an-auditor.pages.dev/",
+      image: "/gif/so1.png"
+    },
+    {
+      title: "HiFive",
+      description: "HiFive is a collection of five interactive games designed to challenge and entertain users. It includes an unbeatable Tic Tac Toe powered by the Minimax algorithm, a real-time Rock-Paper-Scissors game using TensorFlow and webcam detection, a fast Puzzle game with A* algorithm optimization, a classic memory card game, and an exciting Word Search challenge.",
+      technologies: ["ReactJS", "Redux", "Python", "TensorFlow", "OpenCV", "HTML", "CSS/SCSS"],
+      github: "https://github.com/Hoanghuyen2k3/hifive",
+      demo: "https://hoanghuyen2k3.github.io/hifive/",
+      image: "/gif/hifive1.png"
+    },
+    {
+      title: "Memoritoo",
+      description: "A Flashcard website leverages OpenAI to effortlessly create flashcards and generate quizzes based on user input. It incorporates the Pomodoro technique for efficient learning, offers customizable study modes, and enhances retention with visual aids and engaging AI-generated stories. Motivational quotes, versatile learning modes, and unique quiz formats like MindCraft and GeniusMode make learning both fun and effective.",
+      technologies: ["ReactJS", "Redux,", "NodeJS", "OpenAI API", "HTML", "CSS/SCSS"],
+      github: "https://github.com/Hoanghuyen2k3/memoritoo",
+      demo: "https://hoanghuyen2k3.github.io/memoritoo/",
+      image: "/gif/mem2.png"
+    },
+    {
+      title: "Cancer Predictor",
+      description: "Cancer Predictor ML is a machine learning project that uses Logistic Regression to predict the likelihood of breast cancer and diabetes, achieving over 95% accuracy. The project features two applications: one for breast cancer with over 97% accuracy, and another for diabetes, both offering dynamic, interactive graphs based on user input.",
+      technologies: ["Python", "TensorFlow", "Pandas", "Numpy", "Matplotlib", "Jupyter Notebook", "Machine Learning"],
+      github: "https://github.com/Hoanghuyen2k3/Cancer-predictor-ML",
+      demo: "https://cancer-predictor.streamlit.app/",
+      image: "/gif/cancer1.png"
+    },
+    {
+      title: "VNHub",
+      description: "VNhub is your ultimate travel companion, offering real-time weather forecasts, destination information, and AI-powered trip planning. Explore iconic locations and hidden gems in Vietnam and around the world, read user reviews, and get expert travel advice. Plan your next adventure effortlessly with personalized recommendations and expert-guided bookings.",
+      technologies: ["ReactJS", "Redux,", "NodeJS", "OpenAI API", "Weather API", "HTML", "CSS/SCSS"],
+      github: "https://github.com/Hoanghuyen2k3/VNhub",
+      demo: "https://hoanghuyen2k3.github.io/VNhub/",
+      image: "/gif/vn1.png"
+    },
   ];
 
   const SkillCard: React.FC<{ skill: string; data: Skill }> = ({ skill, data }) => {
